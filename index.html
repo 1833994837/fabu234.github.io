@@ -1,0 +1,108 @@
+<!DOCTYPE html>  
+<html lang="zh-CN">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>图片与文字组合并输入密码跳转</title>  
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            margin: 0;  
+            padding: 20px;  
+        }  
+        .item {  
+            margin-bottom: 20px;  
+            text-align: center;  
+        }  
+        .item img {  
+            max-width: 100%;  
+            height: auto;  
+        }  
+        .modal {  
+            display: none;  
+            position: fixed;  
+            z-index: 1;  
+            left: 0;  
+            top: 0;  
+            width: 100%;  
+            height: 100%;  
+            overflow: auto;  
+            background-color: rgba(0, 0, 0, 0.5);  
+        }  
+        .modal-content {  
+            background-color: #fefefe;  
+            margin: 15% auto;  
+            padding: 20px;  
+            border: 1px solid #888;  
+            width: 80%;  
+        }  
+        .close {  
+            color: #aaa;  
+            float: right;  
+            font-size: 28px;  
+            font-weight: bold;  
+        }  
+        .close:hover,  
+        .close:focus {  
+            color: black;  
+            text-decoration: none;  
+            cursor: pointer;  
+        }  
+    </style>  
+</head>  
+<body>  
+  
+<!-- 图片与文字组合 -->  
+<div class="item">  
+    <a href="#" onclick="showModal('local-image-password', 'https://example.com/page1')">  
+        <img src="BDF7AC0FD5715946B40BC014B57F4D55.jpg" alt="本地图片1">  
+    </a>  
+    <p>这是与本地图片1相关的文字内容。</p>  
+</div>  
+  
+<div class="item">  
+    <a href="#" onclick="showModal('remote-image-password', 'https://example.com/page2')">  
+        <img src="https://via.placeholder.com/400x300" alt="远程图片2">  
+    </a>  
+    <p>这是与远程图片2相关的文字内容。</p>  
+</div>  
+  
+<!-- 可以根据需要添加更多组图片和文字 -->  
+  
+<!-- 密码模态框 -->  
+<div id="myModal" class="modal">  
+    <div class="modal-content">  
+        <span class="close" onclick="closeModal()">&times;</span>  
+        <p>请输入密码以继续：</p>  
+        <input type="password" id="passwordInput" placeholder="输入密码">  
+        <button onclick="verifyPassword()">提交</button>  
+    </div>  
+</div>  
+  
+<script>  
+    // 显示模态框并设置要验证的密码和目标URL  
+    function showModal(password, targetUrl) {  
+        window.passwordToVerify = password;  
+        window.targetUrl = targetUrl;  
+        document.getElementById('myModal').style.display = "block";  
+    }  
+  
+    // 关闭模态框  
+    function closeModal() {  
+        document.getElementById('myModal').style.display = "none";  
+    }  
+  
+    // 验证密码并跳转  
+    function verifyPassword() {  
+        const inputPassword = document.getElementById('passwordInput').value;  
+        if (inputPassword === window.passwordToVerify) {  
+            window.location.href = window.targetUrl;  
+        } else {  
+            alert('密码错误，请重试。');  
+        }  
+        closeModal();  
+    }  
+</script>  
+  
+</body>  
+</html>
